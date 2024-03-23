@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api import models
 from api.database import engine
-from api.routes import transformer, auth, users
+from api.routes import transformer, auth, users, chat
 import uvicorn
 
 
@@ -47,6 +47,7 @@ async def root():
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(transformer.router)
+app.include_router(chat.router)
 
 
 if __name__ == "__main__":

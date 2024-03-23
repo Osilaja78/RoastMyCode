@@ -13,6 +13,7 @@ import os
 
 load_dotenv()
 
+EMAIL_SENDER = os.getenv('EMAIL_SENDER')
 EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 
@@ -25,11 +26,11 @@ async def send_mail(email: str, content: str):
         content: the content of the email to be sent.
     """
 
-    email_sender = 'nexusdomains360@gmail.com'
+    email_sender = EMAIL_SENDER
     email_password = EMAIL_PASSWORD
     email_reciever = email
 
-    subject = 'SketchSync - Real-time Witeboard.'
+    subject = 'RoastMyCode - Learn to code better.'
 
     em = MIMEMultipart()
     em['From'] = email_sender
