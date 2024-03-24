@@ -14,3 +14,10 @@ class Users(BaseModel):
 
     class Config():
         from_attributes = True
+
+class AskGPT(BaseModel):
+    code: str
+    personality: str
+
+    class Config():
+        from_attributes = True

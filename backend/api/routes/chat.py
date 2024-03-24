@@ -10,12 +10,13 @@ from api import schemas
 from api import models
 from api.database import get_db
 from uuid import uuid4
+from fastapi.responses import JSONResponse
 
 
 router = APIRouter(tags=['Chat'])
 
 
-@router.get("/user-chat/")
+@router.get("/user-chat")
 def get_user_chats(user: schemas.Users = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     Get chats specific to a user.
@@ -31,15 +32,16 @@ def get_user_chats(user: schemas.Users = Depends(get_current_user), db: Session 
         )
 
 
-@router.post("/new-chat/")
+@router.post("/new-chat")
 def create_chat(chat_title: str, user: schemas.Users = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     Create a new chat.
     """
 
     try:
+        new_chat_id = str(uuid4())
         chat = models.Chat(
-            chat_id=str(uuid4()),
+            chat_id=new_chat_id,
             user=user,
             title=chat_title
         )
@@ -49,7 +51,7 @@ def create_chat(chat_title: str, user: schemas.Users = Depends(get_current_user)
         db.refresh(chat)
         db.close()
 
-        return {"message" : "New chat created successfully!"}
+        return JSONResponse(content={"chat_id": new_chat_id})
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

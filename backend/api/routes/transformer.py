@@ -1,6 +1,7 @@
 """This module contains logic/routes for accessing AI features"""
 
 from fastapi import APIRouter, HTTPException, Request
+from api import schemas
 from pydantic import BaseModel
 from g4f.client import Client
 import g4f
@@ -8,8 +9,6 @@ import g4f
 
 router = APIRouter(tags=['Transformers'])
 
-class RequestData(BaseModel):
-    code: str
 
 personalities = {
     "andrew_tate": f"""
@@ -37,9 +36,11 @@ personalities = {
 
 
 @router.post("/ask_gpt")
-def ask_gpt(code: str, personality: str):
+def ask_gpt(request: schemas.AskGPT):
 
     messages = []
+    code = request.code
+    personality = request.personality
 
     if personality not in personalities:
         personality_description = f"You are a helpful and respectful AI language model."

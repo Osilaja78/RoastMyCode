@@ -66,10 +66,10 @@ async def add_user(request: schemas.Users, db: Session = Depends(get_db)):
             db.commit()
             db.refresh(user)
             db.close()
-        except Exception as e:
+        except Exception:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"User with email already exist! {e}",
+                detail=f"User with email already exist!",
             )
     else:
         raise HTTPException(
