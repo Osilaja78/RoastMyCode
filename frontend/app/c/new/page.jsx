@@ -17,7 +17,7 @@ export default function ChatPage() {
 
     const handleSendMessage = async (event) => {
         event.preventDefault();
-        setLoading(true)
+        setLoading(true);
 
         const personality = "None";
 
@@ -51,6 +51,7 @@ export default function ChatPage() {
             setCode("")
         }
     };
+
 
     return (
         <div className="flex h-screen w-screen text-white fixed">

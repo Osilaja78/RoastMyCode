@@ -15,11 +15,12 @@ export default function HeroSection() {
     const [ isClient, setIsClient ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const { isLoggedIn } = useContext(AuthContext);
-    const createButton = <button className={`bg-red-500 rounded-xl px-5 py-4 text-white mt-2 ${isLoading ? 'disabled' : ''}`}>{isLoading == false ? 'Start a chat' : 'Loading...'}</button>
+
 
     useEffect(() => {
         setIsClient(true);
     })
+
     const router = useRouter();
 
     const handleSignupRedirect = () => {
@@ -30,19 +31,9 @@ export default function HeroSection() {
         router.push("/c/new");
     }
 
-    // Action taken when user wants to create a new board.
-    const handleCreateChat = async () => {
-        setIsLoading(true);
-        // Make a request to the backend to create a new board and get the board ID
-        const response = await fetch(`${baseApiUrl}/new-chat/`, {
-        method: 'POST',
-        });
-        const data = await response.json();
-
-        // redirect user to their newly created whiteboard.
-        router.push(`/whiteboard/${data.board_id}?h=true`);
-        setIsLoading(false);
-    };
+    const handleStartChatButtonClick = () => {
+        router.push("/c")
+    }
 
 
     return (
@@ -56,16 +47,7 @@ export default function HeroSection() {
                         <button className={`bg-blue-700 shadow-2xl rounded-xl px-5 py-3 text-white mt-2 ${isLoading ? 'disabled' : ''}`} onClick={handleQuickRoastButttonClick}>{isLoading == false ? 'Quick Roast!' : 'Loading...'}</button>
                     </div>
                 :
-                <Popup 
-                    trigger={createButton} 
-                    modal
-                    contentStyle={{
-                        maxWidth: '400px',
-                        borderRadius: '20px'
-                    }}
-                >
-                    <CreateChatPopup />
-                </Popup>
+                <button className={`bg-red-500 rounded-xl px-5 py-4 text-white mt-2 ${isLoading ? 'disabled' : ''}`} onClick={handleStartChatButtonClick}>{isLoading == false ? 'Start a chat' : 'Loading...'}</button>
                 }
             </div>
             <div>

@@ -7,8 +7,9 @@ import ReactMarkdown from 'react-markdown';
 
 
 const ChatMessage = ({ content, isUser }) => {
+
   return (
-    <div className="flex max-w-[600px] mx-auto text-[13px] pb-5">
+    <div className="flex max-w-[600px] mx-auto text-[13px] pb-5 text-white">
       <div className="flex gap-4 items-start">
         {isUser ? 
             <Image src={UserIcon} alt='AI-Image'/>
@@ -16,7 +17,7 @@ const ChatMessage = ({ content, isUser }) => {
             <Image src={AiBot} alt='AI-Image'/>
         }
         <div>
-            <ReactMarkdown >{content}</ReactMarkdown>
+            <ReactMarkdown children={content}/>
         </div>
       </div>
     </div>

@@ -11,11 +11,13 @@
   "dependencies": {
     "babel": "^6.23.0",
     "lottie-react": "^2.4.0",
+    "markdown-to-jsx": "^7.4.5",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
     "react-markdown": "^9.0.1",
     "react-scroll": "^1.9.0",
+    "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^10.0.5",
     "reactjs-popup": "^2.0.6"
   },
