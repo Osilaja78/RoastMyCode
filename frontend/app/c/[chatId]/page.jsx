@@ -9,6 +9,7 @@ import { warn, baseApiUrl } from "@/app/layout";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "@/components/auth/AuthContext";
 import ChatMessage from "@/components/chat/aiMessage";
+import { useRouter } from "next/navigation";
 
 
 export default function ChatPage() {
@@ -18,11 +19,13 @@ export default function ChatPage() {
     const [ code, setCode ] = useState("");
     const [ error, setError ] = useState("");
     const [ resultRes, setResultRes ] = useState("");
+    const [ personality, setPersonality ] = useState("");
 
     const { accessToken } = useContext(AuthContext);
 
     const pathName = usePathname();
     const messagesEndRef = useRef(null);
+    const router = useRouter();
     let recentRes = "";
 
     useEffect(() => {
@@ -45,6 +48,9 @@ export default function ChatPage() {
                     console.log(msgs);
                     setChatLoading(false);
                 } else {
+                    if (response.status === 401) {
+                        router.push("/auth/signin");
+                    }
                     console.log(response);
                     setChatLoading(false);
                 }
@@ -62,7 +68,6 @@ export default function ChatPage() {
         event.preventDefault();
         setChatLoading(true);
 
-        const personality = "None";
 
         try {
             const response = await fetch(`${baseApiUrl}/ask_gpt`, {
@@ -108,8 +113,6 @@ export default function ChatPage() {
 
     const addUserChat = async () => {
         const chat_id = pathName.split("/")[2];
-        console.log("HEREEEEEEEEEEEEEEEEEEEEEEEEEE");
-        console.log(resultRes);
 
         try {
             const response = await fetch(`${baseApiUrl}/chats/${chat_id}/add-messages`, {
@@ -131,6 +134,10 @@ export default function ChatPage() {
         }
     }
 
+    const handlePersonalityChange = (e) => {
+        setPersonality(e.target.value);
+    };
+
 
     // Error warning modal form React Toastify.
     if (error) {
@@ -148,8 +155,24 @@ export default function ChatPage() {
 
             {/* Main Chat Interface */}
             <div className="flex-1 overflow-y-auto bg-[#444444]">
+                {/* Personality modal */}
+                <div className="w-full pl-[300px] flex items-center gap-5 text-center bg-[#444444] shadow-2xl fixed top-0 p-3 text-[#B1B1B1] text-[15px]">
+                    <label htmlFor="personality">Choose a Personality:</label>
+                    <select
+                        id="personality"
+                        value={personality}
+                        onChange={handlePersonalityChange}
+                        className="block w-fit py-2 px-3 border border-gray-500 outline-none bg-[#444444] rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    >
+                        <option value="None">Neutral</option>
+                        <option value="andrew_tate">Andrew Tate</option>
+                        <option value="david_goggins">David Goggins</option>
+                        <option value="jack_sparrow">Jack Sparrow</option>
+                        {/* Add more personality options as needed */}
+                    </select>
+                </div>
                 {/* Display Messages */}
-                <div className="space-y-4 mt-16 mb-32 max-w-[400px] mx-auto">
+                <div className="space-y-4 mt-16 mb-32 max-w-[600px] right-0 left-[50%] mx-auto pl-[50px]">
                     {messages && messages.map((message, index) => (
                         <div key={index}>
                             <ChatMessage content={message.question} isUser={true} />
@@ -158,9 +181,9 @@ export default function ChatPage() {
                     ))}
                 </div>
                 <div ref={messagesEndRef} />
-                <div className="w-[500px] flex fixed left-[35%] bottom-6 rounded-2xl h-26 p-4 bg-gray-800 text-white border border-gray-700 text-[10px]">
+                <div className="w-fit right-0 left-[38%] flex fixed bottom-6 rounded-2xl h-26 p-4 bg-gray-800 text-white border border-gray-700 text-[10px]">
                     <textarea
-                        className="w-full bg-gray-800 resize-none outline-none"
+                        className="w-[450px] bg-gray-800 resize-none outline-none"
                         placeholder="Paste formatted code here..."
                         value={code}
                         onChange={(e) => setCode(e.target.value)}

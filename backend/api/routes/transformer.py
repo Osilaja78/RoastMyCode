@@ -1,13 +1,11 @@
 """This module contains logic/routes for accessing AI features"""
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter
 from api import schemas
-from pydantic import BaseModel
 from g4f.client import Client
-import g4f
 
 
-router = APIRouter(tags=['Transformers'])
+router = APIRouter(tags=['AI Model'])
 
 
 personalities = {
@@ -31,7 +29,6 @@ personalities = {
                         of escapes and evasion, Jack is always one step ahead of his 
                         enemies and ready to strike a deal when it suits him.\n\n
                     """
-    # Add more personalities and prompts as needed
 }
 
 
@@ -47,7 +44,7 @@ def ask_gpt(request: schemas.AskGPT):
     else:
         personality_description = personalities[personality]
 
-    prompt = f"{personality_description} \n\n I want you to talk like him and roast this piece of code i wrote: \n\n {code}"
+    prompt = f"{personality_description} \n\n Roast the following code snippet in a friendly and constructive manner, providing specific feedback and highlighting potential areas for improvement. Tone should be kind of fun but also critical. Here's the code: \n\n {code} \n Please add good formatting for readability."
     messages.append({"role": "assistant", "content": prompt})
 
     client = Client()
@@ -56,6 +53,5 @@ def ask_gpt(request: schemas.AskGPT):
         messages=messages,
     )
     reply = response.choices[0].message.content
-    print(reply)
 
     return {"response": reply}

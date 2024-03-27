@@ -5,7 +5,7 @@ routes and logic.
 
 from fastapi import APIRouter, HTTPException,status, Depends
 from api.utils.hashing import verify_password
-from api.utils.token import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from api.utils.token import create_access_token, ACCESS_TOKEN_EXPIRE_HOUR
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from api.database import get_db
@@ -31,7 +31,7 @@ password_exception = HTTPException(
 load_dotenv()
 SECRET_KEY = os.getenv('JWT_SECRET_KEY')
 ALGORITHM = os.getenv('ALGORITHM')
-ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
+ACCESS_TOKEN_EXPIRE_HOUR = os.getenv('ACCESS_TOKEN_EXPIRE_HOUR')
 
 
 @router.post('/auth/login')
@@ -69,7 +69,7 @@ async def login(request: OAuth2PasswordRequestForm = Depends(),
         }
 
     # Generate an access token for the user
-    access_token_expires = timedelta(minutes=float(ACCESS_TOKEN_EXPIRE_MINUTES))
+    access_token_expires = timedelta(hours=float(ACCESS_TOKEN_EXPIRE_HOUR))
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )

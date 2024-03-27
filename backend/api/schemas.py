@@ -21,3 +21,11 @@ class AskGPT(BaseModel):
 
     class Config():
         from_attributes = True
+
+class AddChat(BaseModel):
+    chat_id: str
+    question: str
+    content: str
+
+    class Config():
+        from_attributes = True

@@ -8,6 +8,7 @@ import FeaturesSection from '@/components/featuresSection';
 import HowItWorksComponent from '@/components/howItWorks';
 import AboutUsComponent from '@/components/aboutUs';
 import { AuthContext } from '@/components/auth/AuthContext';
+import { useRouter } from 'next/navigation';
 
 
 const HomePage = () => {
@@ -15,9 +16,19 @@ const HomePage = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const [ isClient, setIsClient ] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     setIsClient(true);
   })
+
+  const handleGetRoastedClick = () => {
+    if (isClient && isLoggedIn == true) {
+      router.push("/c");
+    } else {
+      router.push("/auth/signin");
+    }
+  }
 
   return (
     <>
@@ -44,7 +55,12 @@ const HomePage = () => {
         </p>
         <div className="max-w-max mx-auto flex flex-row gap-5">
           {isClient && isLoggedIn == false && <button className="bg-blue-700 text-white mx-auto py-3 px-5 rounded-xl">Sign Up</button>}
-          <button className="bg-red-600 text-white mx-auto py-3 px-5 rounded-xl">Get Roasted!</button>
+          <button 
+            className="bg-red-600 text-white mx-auto py-3 px-5 rounded-xl"
+            onClick={handleGetRoastedClick}
+          >
+            Get Roasted!
+          </button>
         </div>
       </section>
       <section className="bg-gray-100">

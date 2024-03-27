@@ -4,20 +4,22 @@ import Image from 'next/image';
 import AiBot from '@/public/icons/aiBotWhite.svg';
 import UserIcon from '@/public/icons/userIcon.svg';
 import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 
 
 const ChatMessage = ({ content, isUser }) => {
 
   return (
-    <div className="flex max-w-[600px] mx-auto text-[13px] pb-5 text-white">
+    <div className="flex mx-auto pb-5 text-white text-[15px]">
       <div className="flex gap-4 items-start">
         {isUser ? 
             <Image src={UserIcon} alt='AI-Image'/>
         :
             <Image src={AiBot} alt='AI-Image'/>
         }
-        <div>
-            <ReactMarkdown children={content}/>
+        <div className='w-[600px]'>
+            {/* <ReactMarkdown children={content}/> */}
+            <Markdown children={content}/>
         </div>
       </div>
     </div>

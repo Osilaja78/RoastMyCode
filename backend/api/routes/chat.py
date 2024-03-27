@@ -11,6 +11,7 @@ from api import models
 from api.database import get_db
 from uuid import uuid4
 from fastapi.responses import JSONResponse
+from api import schemas
 
 
 router = APIRouter(tags=['Chat'])
@@ -59,25 +60,25 @@ def create_chat(chat_title: str, user: schemas.Users = Depends(get_current_user)
         )
 
 
-@router.post("/chats/{chat_id}/messages/")
-def add_message_to_chat(chat_id: str, question: str, content: str, db: Session = Depends(get_db), user: schemas.Users = Depends(get_current_user)):
+@router.post("/chats/{chat_id}/add-messages")
+def add_message_to_chat(request: schemas.AddChat, db: Session = Depends(get_db), user: schemas.Users = Depends(get_current_user)):
     """
     Add a new message to a chat.
     """
 
     try:
         # Check if the chat exists
-        chat = db.query(models.Chat).filter(models.Chat.chat_id == chat_id).first()
+        chat = db.query(models.Chat).filter(models.Chat.chat_id == request.chat_id).first()
         if not chat:
             raise HTTPException(status_code=404, detail="Chat not found")
 
         # Create the message
         message = models.Message(
             message_id=str(uuid4()),
-            chat_id=chat_id,
+            chat_id=request.chat_id,
             sender_id=user.id,
-            question=question,
-            content=content
+            question=request.question,
+            content=request.content
         )
 
         db.add(message)
