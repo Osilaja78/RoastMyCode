@@ -1,8 +1,8 @@
-# Webstack - ALX Portfolio Project for Specializations
+# Webstack - ALX Portfolio Project for Specializations ✨
 
-## RoastMyCode
+## RoastMyCode 😎
 
-Are you tired of writing code in isolation? Are you seeking valuable feedback to enhance your programming skills? Look no further than Roast My Code – the ultimate platform for developers to receive constructive criticism on their code snippets.
+Are you tired of writing code in isolation 😥? Are you seeking valuable feedback to enhance your programming skills? Look no further than Roast My Code 🥰 – the ultimate platform for developers to receive constructive criticism on their code snippets.
 
 ### Our Story
 The aim of the platform is to build something serves as a valuable resource for developers of all skill levels, offering them the opportunity to learn from experienced AI critics, refine their coding techniques, and ultimately become better developers.
