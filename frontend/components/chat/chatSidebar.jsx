@@ -7,6 +7,7 @@ import { baseApiUrl } from "@/app/layout";
 import { AuthContext } from "../auth/AuthContext";
 import { ColorRing } from "react-loader-spinner";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export default function ChatSidebarComponent() {
@@ -15,6 +16,9 @@ export default function ChatSidebarComponent() {
     const [ titleLoading, setTitleLoading ] = useState(false);
 
     const { accessToken } = useContext(AuthContext);
+
+    const router = useRouter();
+
 
     useEffect(() => {
         const fetchChatTitles = async () => {
@@ -32,6 +36,8 @@ export default function ChatSidebarComponent() {
                     const data = await response.json();
                     setChats(data);
                     setTitleLoading(false);
+                } else if (response.status === 401) {
+                    router.push("/auth/signin");
                 } else {
                     console.log(response);
                     setTitleLoading(false);

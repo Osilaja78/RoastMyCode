@@ -65,7 +65,7 @@ export default function ChatPage() {
                     <h1 className="text-center p-3 text-[#B1B1B1] text-[15px]">New Chat</h1>
                 </div>
                 {/* Display Messages */}
-                <div className="space-y-4 mt-16 mb-32">
+                <div className="space-y-4 mt-16 mb-32 max-w-[700px] mx-auto">
                     {messages.map((message, index) => (
                         <ChatMessage key={index} content={message.content} isUser={message.isUser} />
                     ))}

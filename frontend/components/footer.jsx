@@ -37,7 +37,7 @@ export default function Footer() {
                         <div>
                             <p className="text-[25px]">Support</p>
                             <ul>
-                                <li>FAQs</li>
+                                <li><Link href="/faq">FAQs</Link></li>
                                 <li>Terms Of Use</li>
                                 <li>Help</li>
                             </ul>

@@ -147,9 +147,9 @@ export default function ChatPage() {
 
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen w-screen fixed">
             {/* Sidebar */}
-            <div className="w-64 bg-[#0A0708] fixed inset-y-0 left-0 overflow-y-auto z-30">
+            <div className="w-64 bg-[#0A0708] fixed  overflow-y-auto z-30">
                 <ChatSidebarComponent />
             </div>
 
@@ -181,7 +181,7 @@ export default function ChatPage() {
                     ))}
                 </div>
                 <div ref={messagesEndRef} />
-                <div className="w-fit right-0 left-[38%] flex fixed bottom-6 rounded-2xl h-26 p-4 bg-gray-800 text-white border border-gray-700 text-[10px]">
+                <div className="w-fit right-0 left-[38%] flex fixed bottom-6 rounded-2xl h-26 p-4 bg-gray-800 text-white border border-gray-700 text-[13px]">
                     <textarea
                         className="w-[450px] bg-gray-800 resize-none outline-none"
                         placeholder="Paste formatted code here..."
