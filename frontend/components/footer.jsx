@@ -37,9 +37,9 @@ export default function Footer() {
                         <div>
                             <p className="text-[25px]">Support</p>
                             <ul>
-                                <li><Link href="/faq">FAQs</Link></li>
-                                <li>Terms Of Use</li>
-                                <li>Help</li>
+                                <li className="list-none ml-0"><Link href="/faq">FAQs</Link></li>
+                                <li className="list-none ml-0">Terms Of Use</li>
+                                <li className="list-none ml-0">Help</li>
                             </ul>
                         </div>
                         <div>

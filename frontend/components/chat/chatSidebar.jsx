@@ -8,6 +8,8 @@ import { AuthContext } from "../auth/AuthContext";
 import { ColorRing } from "react-loader-spinner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Popup from "reactjs-popup";
+import CreateChatPopup from "../popup";
 
 
 export default function ChatSidebarComponent() {
@@ -18,6 +20,11 @@ export default function ChatSidebarComponent() {
     const { accessToken } = useContext(AuthContext);
 
     const router = useRouter();
+
+    const createButton = <button className="px-4 mt-5 py-2 gap-2 text-[#B1B1B1] flex items-center border border-[#B1B1B1] rounded-xl max-w-max mx-auto">
+                            <Image src={PlusIcon} alt="new-chat"/>
+                            New Chat
+                        </button>
 
 
     useEffect(() => {
@@ -58,10 +65,16 @@ export default function ChatSidebarComponent() {
                 <Link href="/"><Image src={Logo} width={40} alt="logo" /></Link>
                 <Link href="/"><p className="text-[20px] text-white">RoastMyCode</p></Link>
             </div>
-            <button className="px-4 mt-5 py-2 gap-2 text-[#B1B1B1] flex items-center border border-[#B1B1B1] rounded-xl max-w-max mx-auto">
-                <Image src={PlusIcon} alt="new-chat"/>
-                New Chat
-            </button>
+            <Popup 
+                trigger={createButton} 
+                modal
+                contentStyle={{
+                    maxWidth: '400px',
+                    borderRadius: '20px'
+                }}
+            >
+                <CreateChatPopup />
+            </Popup>
             <div className="mt-10 text-[#B1B1B1]">
                 <p className="mb-5 text-[15px]">Chat History</p>
                 <hr />

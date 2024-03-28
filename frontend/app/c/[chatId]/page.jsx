@@ -149,7 +149,7 @@ export default function ChatPage() {
     return (
         <div className="flex h-screen w-screen fixed">
             {/* Sidebar */}
-            <div className="w-64 bg-[#0A0708] fixed  overflow-y-auto z-30">
+            <div className="w-64 bg-[#0A0708] fixed z-30 h-full">
                 <ChatSidebarComponent />
             </div>
 
@@ -173,6 +173,7 @@ export default function ChatPage() {
                 </div>
                 {/* Display Messages */}
                 <div className="space-y-4 mt-16 mb-32 max-w-[600px] right-0 left-[50%] mx-auto pl-[50px]">
+                    {messages && messages.length === 0 ? <div className="text-center text-[30px] text-[#B1B1B1] mt-[250px] pl-[140px]">Roast My Code</div> : ''}
                     {messages && messages.map((message, index) => (
                         <div key={index}>
                             <ChatMessage content={message.question} isUser={true} />

@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import SendIcon from "@/public/icons/sendIcon.svg";
 import Image from "next/image";
 import ChatMessage from "@/components/chat/aiMessage";
@@ -14,6 +14,8 @@ export default function ChatPage() {
     const [messages, setMessages] = useState([]);
     const [code, setCode] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const messagesEndRef = useRef(null);
 
     const handleSendMessage = async (event) => {
         event.preventDefault();
@@ -52,6 +54,11 @@ export default function ChatPage() {
         }
     };
 
+    useEffect(() => {
+        // Scroll to the last message when messages change or initially load
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
 
     return (
         <div className="flex h-screen w-screen text-white fixed">
@@ -65,12 +72,13 @@ export default function ChatPage() {
                     <h1 className="text-center p-3 text-[#B1B1B1] text-[15px]">New Chat</h1>
                 </div>
                 {/* Display Messages */}
+                {messages && messages.length === 0 ? <div className="text-center text-[30px] text-[#B1B1B1] mt-[250px]">Roast My Code</div> : ''}
                 <div className="space-y-4 mt-16 mb-32 max-w-[700px] mx-auto">
                     {messages.map((message, index) => (
                         <ChatMessage key={index} content={message.content} isUser={message.isUser} />
                     ))}
                 </div>
-
+                <div ref={messagesEndRef} />
                 <div className="w-[550px] flex fixed left-[30%] bottom-6 rounded-2xl h-26 p-4 bg-gray-800 text-white border border-gray-700 text-[15px]">
                     <textarea
                         className="w-full bg-gray-800 resize-none outline-none"

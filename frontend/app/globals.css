@@ -1,4 +1,21 @@
 @tailwind base;
+@layer base {
+  h1 {
+    @apply text-2xl py-5;
+  }
+  h2 {
+    @apply text-xl py-4;
+  }
+  h3 {
+    @apply text-xl py-3;
+  }
+  h4 {
+    @apply text-xl py-3 font-[500];
+  }
+  h5 {
+    @apply text-xl py-2;
+  }
+}
 @tailwind components;
 @tailwind utilities;
 
@@ -16,4 +33,20 @@ pre {
   overflow-x: scroll;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+strong {
+  margin-top: 10px;
+}
+
+div > ul, div > ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div > ul > li, div > ol > li {
+  list-style: decimal;
+  margin-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
