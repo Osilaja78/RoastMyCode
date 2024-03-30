@@ -14,19 +14,13 @@ export default function VerifyToken() {
     const [error, setError] = useState('');
     const searchParams = useSearchParams();
     const router = useRouter();
-
-    const getToken = () => {
-        const token = searchParams.get('token');
-        return token
-    }
     
     useEffect(() => {
         const verifyToken = async (e) => {
             setLoading(true)
 
             try {
-                const token = getToken();
-                const res = await fetch(`${baseApiUrl}/auth/verify-token?token=${token}`, {
+                const res = await fetch(`${baseApiUrl}/auth/verify-token?token=${searchParams.get('token')}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
