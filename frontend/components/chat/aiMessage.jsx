@@ -18,7 +18,7 @@ const ChatMessage = ({ content, isUser }) => {
         }
         <div className='w-[600px]'>
             {/* <ReactMarkdown children={content}/> */}
-            <Markdown children={content}/>
+            <Markdown>{content}</Markdown>
         </div>
       </div>
     </div>
