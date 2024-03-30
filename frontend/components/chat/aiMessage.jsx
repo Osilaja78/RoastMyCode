@@ -3,7 +3,6 @@ import React from 'react';
 import Image from 'next/image';
 import AiBot from '@/public/icons/aiBotWhite.svg';
 import UserIcon from '@/public/icons/userIcon.svg';
-import ReactMarkdown from 'react-markdown';
 import Markdown from 'markdown-to-jsx';
 
 

@@ -1,12 +1,9 @@
 // Main hero section for homepage.
 import Lottie from "lottie-react";
-import Popup from 'reactjs-popup';
-import CreateChatPopup from "./popup";
 import 'reactjs-popup/dist/index.css';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./auth/AuthContext";
-import { useRouter, useSearchParams } from "next/navigation";
-import { baseApiUrl } from "@/app/layout";
+import { useRouter } from "next/navigation";
 import HeroCodeAnimation from "@/public/animations/hero-code";
 
 
@@ -24,15 +21,21 @@ export default function HeroSection() {
     const router = useRouter();
 
     const handleSignupRedirect = () => {
+        setIsLoading(true);
         router.push("/auth/signup");
+        setIsLoading(false);
     }
 
     const handleQuickRoastButttonClick = () => {
+        setIsLoading(true);
         router.push("/c/new");
+        setIsLoading(false);
     }
 
     const handleStartChatButtonClick = () => {
-        router.push("/c")
+        setIsLoading(true);
+        router.push("/c");
+        setIsLoading(false);
     }
 
 

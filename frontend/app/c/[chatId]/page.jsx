@@ -18,7 +18,6 @@ export default function ChatPage() {
     const [ chatLoading, setChatLoading ] = useState(false);
     const [ code, setCode ] = useState("");
     const [ error, setError ] = useState("");
-    const [ resultRes, setResultRes ] = useState("");
     const [ personality, setPersonality ] = useState("");
 
     const { accessToken } = useContext(AuthContext);
@@ -81,7 +80,6 @@ export default function ChatPage() {
             if (response.ok) {
                 const data = await response.json();
                 const result = data.response;
-                setResultRes(result);
                 recentRes = result;
 
                 // Add user message and AI response to messages list
@@ -96,7 +94,7 @@ export default function ChatPage() {
                 console.log(errorData.detail);
             }
           
-        setLoading(false);
+        setChatLoading(false);
         setCode("")
         } catch (err) { // Handle signin error.
             setChatLoading(false);

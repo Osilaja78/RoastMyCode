@@ -12,7 +12,7 @@ export default function AboutUsComponent() {
             <div className="max-w-[600px] mx-auto my-5 text-center">
                 <p>
                     At RoastMyCode, we believe that coding is not just about 
-                    writing lines of code—it's about continuous improvement, 
+                    writing lines of code—its about continuous improvement, 
                     creativity, and learning from one another. Our platform 
                     provides a unique and fun way for developers to receive 
                     constructive feedback on their code snippets, helping them 
