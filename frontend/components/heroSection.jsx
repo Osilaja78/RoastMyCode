@@ -39,7 +39,7 @@ export default function HeroSection() {
     return (
         <div className="md:flex items-center w-[80%] md:w-[100%] max-w-[1000px] mx-auto gap-10 mt-[40px] md:mt-[70px] pb-[135px] text-white">
             <div className="max-w-[650px] text-center md:text-left pt-20">
-                <h1 className="text-[20px] leading-10 py-0 md:text-[40px]">Receive Constructive Criticism, Improve Your Code, and Learn Best Practices</h1>
+                <h1 className="text-[20px] leading-[50px] py-0 md:text-[40px]">Receive Constructive Criticism, Improve Your Code, and Learn Best Practices</h1>
                 <h2 className="text-[20px] mt-3">Roast My Code — the ultimate platform for developers to receive constructive criticism on their code snippets.</h2>
                 {isClient && isLoggedIn == false ?
                     <div className="flex gap-5">

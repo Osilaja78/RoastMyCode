@@ -92,7 +92,7 @@ export default function ChatSidebarComponent() {
                     :
                     <ul>
                     {chats && chats.map((chat, index) => (
-                        <li className="mt-3" key={index}><Link href={`/c/${chat.chat_id}`}>{chat.title}</Link></li>
+                        <li className="mt-3 list-none" key={index}><Link href={`/c/${chat.chat_id}`}>{chat.title}</Link></li>
                     ))}
                 </ul>
                 }
