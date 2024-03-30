@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -55,11 +55,11 @@ export default function VerifyToken() {
 	}
 
     return (
-        <>
+        <Suspense fallback={<p>Loading...</p>}>
             <section className="h-[100vh]">
                 {loading ? <p className="text-[50px] text-center">Loading...</p> : ''}
                 <ToastContainer />
             </section>
-        </>
+        </Suspense>
     )
 }
