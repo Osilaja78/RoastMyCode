@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { warn, notify } from "@/app/layout";
 import { baseApiUrl } from "@/app/layout";
@@ -17,7 +17,8 @@ export default function VerifyToken() {
     
     useEffect(() => {
         const verifyToken = async (e) => {
-            setLoading(true)
+            e.preventDefault();
+            setLoading(true);
 
             try {
                 const res = await fetch(`${baseApiUrl}/auth/verify-token?token=${searchParams.get('token')}`, {
