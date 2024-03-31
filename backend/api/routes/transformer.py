@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 from api import schemas
 from g4f.client import Client
+from g4f.Provider import You
 
 
 router = APIRouter(tags=['AI Model'])
@@ -44,14 +45,18 @@ def ask_gpt(request: schemas.AskGPT):
     else:
         personality_description = personalities[personality]
 
-    prompt = f"{personality_description} \n\n Roast the following code snippet in a friendly and constructive manner, providing specific feedback and highlighting potential areas for improvement. Tone should be kind of fun but also critical. Here's the code: \n\n {code} \n Please add good formatting for readability."
+    prompt = f"{personality_description} \n\n Roast the following code snippet in a criticizing and constructive manner, providing specific feedback and highlighting potential areas for improvement. Tone should be kind of fun but also critical. Here's the code: \n\n {code} \n Please add good formatting for readability."
     messages.append({"role": "assistant", "content": prompt})
 
     client = Client()
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-    )
-    reply = response.choices[0].message.content
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            provider=You,
+            messages=messages,
+        )
+        reply = response.choices[0].message.content
 
-    return {"response": reply}
+        return {"response": reply}
+    except Exception as e:
+        return f"An exception occured: {e}"
